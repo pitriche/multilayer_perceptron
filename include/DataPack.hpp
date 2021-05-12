@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DataPack.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/07 15:03:34 by brunomartin      ###   ########.fr       */
+/*   Updated: 2021/05/12 11:12:41 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include <vector>
 #include <array>
 #include <string>
-
-// #include <cmath>
-// #include <cstdlib>
 
 typedef	float real_t;	// real type to use everywhere
 

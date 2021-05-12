@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   DataPack.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/07 16:01:17 by brunomartin      ###   ########.fr       */
+/*   Updated: 2021/05/12 11:18:10 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <array>
-#include <string>
-
-// #include <cmath>
-// #include <cstdlib>
+#include <cmath>
+#include <cstdlib>
 
 #include "DataPack.hpp"
 
@@ -54,8 +48,8 @@ static Tuple	_parse_example(std::string &line)
 		}
 		element++;
 	}
-	//if (element != 19)
-	//	throw std::logic_error("Invalid example");
+	if (element != 32)
+		throw std::logic_error("Invalid example (" + std::to_string(element) + " elements)");
 	return (tup);
 }
 
