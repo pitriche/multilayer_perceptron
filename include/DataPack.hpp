@@ -6,15 +6,18 @@
 /*   By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/07 15:03:34 by brunomartin      ###   ########.fr       */
+/*   Updated: 2021/05/09 10:23:19 by brunomartin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <array>
-#include <string>
+#ifndef DATAPACK_HPP
+# define DATAPACK_HPP
+
+# include <iostream>
+# include <sstream>
+# include <vector>
+# include <array>
+# include <string>
 
 // #include <cmath>
 // #include <cstdlib>
@@ -37,3 +40,5 @@ struct DataPack : std::vector<Tuple>
 		// split the data in 2 sets randomly
 		DataPack	split(double ratio);
 };
+
+#endif

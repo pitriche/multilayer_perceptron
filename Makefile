@@ -6,7 +6,7 @@
 #    By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 14:21:44 by pitriche          #+#    #+#              #
-#    Updated: 2021/05/07 14:55:48 by brunomartin      ###   ########.fr        #
+#    Updated: 2021/05/09 10:53:50 by brunomartin      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,15 @@ RESET	= \033[0m
 NAME = mlperc
 
 CLASSES=	\
-DataPack
+DataPack	\
+Layer		\
 
 
 CLASSES_HEADERS= $(addsuffix .hpp, $(CLASSES))
 CLASSES_SRCS= $(addsuffix .cpp, $(CLASSES))
 
 HEADERS = $(CLASSES_HEADERS) \
+real_t.hpp
 
 SRC_FILES = $(CLASSES_SRCS)	\
 main.cpp		\
