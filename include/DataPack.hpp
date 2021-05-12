@@ -6,15 +6,18 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 11:12:41 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:20:31 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <array>
-#include <string>
+#ifndef DATAPACK_HPP
+# define DATAPACK_HPP
+
+# include <iostream>
+# include <sstream>
+# include <vector>
+# include <array>
+# include <string>
 
 typedef	float real_t;	// real type to use everywhere
 
@@ -34,3 +37,5 @@ struct DataPack : std::vector<Tuple>
 		// split the data in 2 sets randomly
 		DataPack	split(double ratio);
 };
+
+#endif
