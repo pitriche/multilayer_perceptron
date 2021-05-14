@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Layer.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/09 10:56:18 by brunomartin      ###   ########.fr       */
+/*   Updated: 2021/05/12 14:03:53 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LAYER_HPP
 
 # include <vector>
-# include "real_t.hpp"
+# include "Types.hpp"
 
 struct Layer
 {
@@ -23,10 +23,12 @@ struct Layer
 	const unsigned						n_input;
 	const unsigned						n_output;
 
+	Layer(void);
 	Layer(unsigned input, unsigned output);
 	~Layer(void);
 
-	void	initialize(void);
+	void				initialize(void);
+	std::vector<real_t>	execute(std::vector<real_t> input);
 
 	Layer	&operator=(const Layer &rhs);
 };

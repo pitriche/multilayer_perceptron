@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Layer.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/09 10:28:17 by brunomartin      ###   ########.fr       */
+/*   Updated: 2021/05/12 14:23:58 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <climits>
 #include "Layer.hpp"
 
+Layer::Layer(void) : n_input(0), n_output(0) { }
 Layer::Layer(unsigned input, unsigned output) : n_input(input),
 	n_output(output)
 {

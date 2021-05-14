@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/09 10:22:03 by brunomartin      ###   ########.fr       */
+/*   Updated: 2021/05/12 14:18:05 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fstream>
 
 #include "DataPack.hpp"
-#include "Layer.hpp"
+#include "Network.hpp"
 
 #define SEED				460
 #define TRAIN_TEST_RATIO	0.7
@@ -49,7 +49,9 @@ int			main(int ac, char **av)
 	test = train.split(TRAIN_TEST_RATIO);
 	std::cout << "train set size: " << train.size() << std::endl;
 	std::cout << "test set size: " << test.size() << std::endl;
-	Layer	l(10, 20);
-	l.initialize();
+	Network net;
+
+	net.initialize();
+	net.execute(train[0]);
 	return (0);
 }

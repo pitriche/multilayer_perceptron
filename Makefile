@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brunomartin <brunomartin@student.42.fr>    +#+  +:+       +#+         #
+#    By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 14:21:44 by pitriche          #+#    #+#              #
-#    Updated: 2021/05/09 10:53:50 by brunomartin      ###   ########.fr        #
+#    Updated: 2021/05/12 14:19:06 by pitriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ NAME = mlperc
 
 CLASSES=	\
 DataPack	\
+Network		\
 Layer		\
 
 
@@ -32,7 +33,7 @@ CLASSES_HEADERS= $(addsuffix .hpp, $(CLASSES))
 CLASSES_SRCS= $(addsuffix .cpp, $(CLASSES))
 
 HEADERS = $(CLASSES_HEADERS) \
-real_t.hpp
+Types.hpp
 
 SRC_FILES = $(CLASSES_SRCS)	\
 main.cpp		\
