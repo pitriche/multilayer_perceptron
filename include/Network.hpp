@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/17 14:07:18 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:02:23 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "Layer.hpp"
 # include "Types.hpp"
+# include "DataPack.hpp"
 
 # define HIDDEN_LAYER_1 21
 # define HIDDEN_LAYER_2 16
@@ -30,6 +31,8 @@ struct Network
 
 	void					initialize(void);
 	std::array<real_t, 2>	execute(const Tuple &input);
+
+	void					learning_cycle(const DataPack &train);
 };
 
 #endif

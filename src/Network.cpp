@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/17 14:09:31 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:30:42 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,9 @@ std::array<real_t, 2>	Network::execute(const Tuple &input)
 	result[1] = values[1];
 	return (result);
 }
+
+void					Network::learning_cycle(const DataPack &train)
+{
+	
+}
+
