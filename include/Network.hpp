@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 14:12:06 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:07:18 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct Network
 	~Network(void);
 
 	void					initialize(void);
-	std::array<real_t, 2>	execute(Tuple input);
+	std::array<real_t, 2>	execute(const Tuple &input);
 };
 
 #endif

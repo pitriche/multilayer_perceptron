@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 14:40:29 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:09:31 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ void					Network::initialize(void)
 		l.initialize();
 }
 
-std::array<real_t, 2>	Network::execute(Tuple input)
+std::array<real_t, 2>	Network::execute(const Tuple &input)
 {
-	std::vector<real_t> result(input.begin() + 1, input.end());
+	std::vector<real_t>		values(input.begin() + 0, input.end());
+	std::array<real_t, 2>	result;
 
-	for (auto i : result)
-		std::cout << i << std::endl;
+	values = this->layer[0].execute(values);
+	values = this->layer[1].execute(values);
+	values = this->layer[2].execute(values);
+	result[0] = values[0];
+	result[1] = values[1];
+	return (result);
 }

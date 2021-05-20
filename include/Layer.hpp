@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 14:03:53 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:07:31 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct Layer
 	~Layer(void);
 
 	void				initialize(void);
-	std::vector<real_t>	execute(std::vector<real_t> input);
+	std::vector<real_t>	execute(const std::vector<real_t> &input);
 
 	Layer	&operator=(const Layer &rhs);
 };

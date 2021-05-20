@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 14:18:05 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/20 14:16:07 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int			main(int ac, char **av)
 	Network net;
 
 	net.initialize();
-	net.execute(train[0]);
+	std::cout << net.execute(train[0])[0] << ' ' << net.execute(train[0])[1] << std::endl;
 	return (0);
 }

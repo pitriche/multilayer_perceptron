@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 11:18:10 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/17 13:43:16 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	DataPack::parse(std::istream &is)
 {
 	std::string	tmp;
 
-	std::getline(is, tmp);
 	while (is.good())
 	{
 		std::getline(is, tmp);
