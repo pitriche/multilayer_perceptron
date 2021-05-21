@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Network.hpp                                        :+:      :+:    :+:   */
+/*   Defines.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 17:36:13 by pitriche         ###   ########.fr       */
+/*   Created: 2021/05/09 10:53:26 by pitriche          #+#    #+#             */
+/*   Updated: 2021/05/21 18:24:54 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NETWORK_HPP
-# define NETWORK_HPP
+#ifndef DEFINES_HPP
+# define DEFINES_HPP
 
-# include <array>
+# define SEED				460
+# define TRAIN_TEST_RATIO	0.7
+# define LEARNING_RATE		1e-2f
 
-# include "Layer.hpp"
-# include "Types.hpp"
-# include "DataPack.hpp"
-
-
-struct Network
-{
-	std::array<Layer, 3> layer;
-
-	Network(void);
-	~Network(void);
-
-	void					initialize(void);
-	std::array<real_t, 2>	execute(const Tuple &input);
-
-	real_t					cost(const DataPack &test);
-	void					learning_cycle(const DataPack &train);
-};
+# define HIDDEN_LAYER_1 21
+# define HIDDEN_LAYER_2 16
 
 #endif

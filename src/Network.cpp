@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 16:38:20 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/21 18:24:34 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 #include "Network.hpp"
 #include "Types.hpp"
+#include "Defines.hpp"
 #include <cmath>	// pow, M_E
+
 
 /* ########################################################################## */
 
@@ -69,21 +71,21 @@ void					Network::learning_cycle(const DataPack &train)
 	global_deriv_l2.initialize_null();
 	for (const Tuple &example : train)
 	{
-		Layer	deriv_l2;	// example's derivatives
+		Layer	deriv_l2(HIDDEN_LAYER_2, 2);	// example's derivatives
 		Vector 	deriv_cost_activ;
 		
 		Vector	input(example.begin() + 1, example.end());
 		Vector	activ_l0;	// activation of layer 0's neurons
 		Vector	activ_l1;	// activation of layer 1's neurons
 		Vector	activ_l2;	// activation of layer 2's neurons (network output)
-
+		
 		activ_l0 = this->layer[0].execute(input);
 		activ_l1 = this->layer[1].execute(activ_l0);
 		activ_l2 = this->layer[2].execute(activ_l1);
 
 		// Layer 2
 		deriv_cost_activ.resize(2);
-		deriv_cost_activ[0] = 2 * (activ_l2[0] + example[0]));
+		deriv_cost_activ[0] = 2 * (activ_l2[0] + example[0]);
 		deriv_cost_activ[1] = 2 * (activ_l2[1] - example[0]);
 		deriv_l2 = this->layer[2].derivatives(deriv_cost_activ, activ_l1);
 		
@@ -93,5 +95,15 @@ void					Network::learning_cycle(const DataPack &train)
 				global_deriv_l2.weight[neuron][input] += deriv_l2.weight[neuron][input];
 			global_deriv_l2.bias[neuron] += deriv_l2.bias[neuron];
 		}
+	}
+	for (unsigned neuron = 0; neuron < global_deriv_l2.n_output; ++neuron)
+	{
+		for (unsigned input = 0; input < global_deriv_l2.n_input; ++input)
+		{
+			global_deriv_l2.weight[neuron][input] /= train.size();
+			this->layer[2].weight[neuron][input] -= global_deriv_l2.weight[neuron][input] * LEARNING_RATE;
+		}
+		global_deriv_l2.bias[neuron] /= train.size();
+		this->layer[2].bias[neuron] -= global_deriv_l2.bias[neuron] * LEARNING_RATE;
 	}
 }

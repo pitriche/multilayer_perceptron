@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 15:53:11 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/21 18:24:04 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <cmath>	// tanh
 #include "Layer.hpp"
 
-// #############################################################################
+/* ########################################################################## */
 
 inline static real_t	_rand()
 { return (((real_t)std::rand() / (real_t)INT_MAX) * 2.0f - 1.0f); }
@@ -23,7 +23,10 @@ inline static real_t	_rand()
 // inline static real_t	_sigmoid(real_t x)
 // { return (1 / (1 + std::pow(M_E, -x))); }
 
-// #############################################################################
+inline static real_t	_tanh_deriv(real_t x)
+{ return (1 - (real_t)std::pow(std::tanh(x), 2)); }
+
+/* ########################################################################## */
 
 Layer::Layer(void) : n_input(0), n_output(0) { }
 Layer::Layer(unsigned input, unsigned output) : n_input(input),
@@ -69,6 +72,28 @@ Vector	Layer::execute(const Vector &input)
 		result[neuron_id] = std::tanh(result[neuron_id]);	// activation function
 	}
 	return(result);
+}
+
+# include <iostream> //////////////////////////////
+Layer	Layer::derivatives(const Vector &deriv_cost_activ, const Vector &input)
+{
+	Layer	deriv(this->n_input, this->n_output);
+	real_t	weighted_sum;
+
+	for (unsigned neuron_id = 0; neuron_id < this->n_output; ++neuron_id)
+	{
+		// compute weighted_sum
+		weighted_sum = 0;
+		for (unsigned input_id = 0; input_id < this->n_input; ++input_id)
+			weighted_sum += input[input_id] * this->weight[neuron_id][input_id];
+		weighted_sum += this->bias[neuron_id];
+
+		// compute derivatives
+		deriv.bias[neuron_id] = _tanh_deriv(weighted_sum) * deriv_cost_activ[neuron_id];
+		for (unsigned input_id = 0; input_id < this->n_input; ++input_id)
+			deriv.weight[neuron_id][input_id] = input[input_id] * deriv.bias[neuron_id];
+	}
+	return (deriv);
 }
 
 

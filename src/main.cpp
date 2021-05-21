@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 14:42:14 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/21 17:35:29 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 
 #include "DataPack.hpp"
 #include "Network.hpp"
-
-#define SEED				460
-#define TRAIN_TEST_RATIO	0.7
+#include "Defines.hpp"
 
 int			main(int ac, char **av)
 {
@@ -52,6 +50,10 @@ int			main(int ac, char **av)
 
 	Network net;
 	net.initialize();
+	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
+	net.learning_cycle(train);
+	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
+	net.learning_cycle(train);
 	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
 	return (0);
 }
