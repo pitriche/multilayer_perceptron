@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/20 14:16:07 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:42:14 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int			main(int ac, char **av)
 	test = train.split(TRAIN_TEST_RATIO);
 	std::cout << "train set size: " << train.size() << std::endl;
 	std::cout << "test set size: " << test.size() << std::endl;
-	Network net;
 
+	Network net;
 	net.initialize();
-	std::cout << net.execute(train[0])[0] << ' ' << net.execute(train[0])[1] << std::endl;
+	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
 	return (0);
 }

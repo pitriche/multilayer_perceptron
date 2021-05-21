@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/20 14:14:38 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:53:11 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,32 @@ Layer::Layer(unsigned input, unsigned output) : n_input(input),
 	if (input == 0 || output == 0)
 		throw (std::logic_error("Invalid layer size"));
 	this->bias.resize(output, 0.0f);
-	this->weight.resize(output, std::vector<real_t>(input, 0.0f));
+	this->weight.resize(output, Vector(input, 0.0f));
 }
 
 Layer::~Layer(void) { }
 
 
-void				Layer::initialize(void)
+void	Layer::initialize(void)
 {
 	for (real_t &n : this->bias)
 		n = _rand();
-	for (std::vector<real_t> &vec : this->weight)
+	for (Vector &vec : this->weight)
 		for (real_t &n : vec)
 			n = _rand();
 
 }
 
-std::vector<real_t>	Layer::execute(const std::vector<real_t> &input)
+void	Layer::initialize_null(void)
 {
-	std::vector<real_t> result;
+	std::fill(this->bias.begin(), this->bias.end(), 0.0f);
+	for (Vector &vec : this->weight)
+		std::fill(vec.begin(), vec.end(), 0.0f);
+}
+
+Vector	Layer::execute(const Vector &input)
+{
+	Vector result;
 
 	result.resize(this->n_output, 0.0f);
 	for (unsigned neuron_id = 0; neuron_id < this->n_output; ++neuron_id)

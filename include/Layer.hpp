@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/17 14:07:31 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:47:14 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 
 struct Layer
 {
-	std::vector<std::vector<real_t>>	weight;
-	std::vector<real_t>					bias;
-	const unsigned						n_input;
-	const unsigned						n_output;
+	std::vector<Vector>	weight;
+	Vector				bias;
+	const unsigned		n_input;
+	const unsigned		n_output;
 
 	Layer(void);
 	Layer(unsigned input, unsigned output);
 	~Layer(void);
 
-	void				initialize(void);
-	std::vector<real_t>	execute(const std::vector<real_t> &input);
+	void	initialize(void);
+	void	initialize_null(void);
+	Vector	execute(const Vector &input);
+	Layer	derivatives(const Vector &deriv_cost_activ, const Vector &input);
 
 	Layer	&operator=(const Layer &rhs);
 };
