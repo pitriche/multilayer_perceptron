@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 18:24:04 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/25 13:39:56 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Layer::Layer(unsigned input, unsigned output) : n_input(input),
 		throw (std::logic_error("Invalid layer size"));
 	this->bias.resize(output, 0.0f);
 	this->weight.resize(output, Vector(input, 0.0f));
+	this->derivative_activation.resize(input, 0.0f);
 }
 
 Layer::~Layer(void) { }
@@ -74,7 +75,6 @@ Vector	Layer::execute(const Vector &input)
 	return(result);
 }
 
-# include <iostream> //////////////////////////////
 Layer	Layer::derivatives(const Vector &deriv_cost_activ, const Vector &input)
 {
 	Layer	deriv(this->n_input, this->n_output);
@@ -91,7 +91,10 @@ Layer	Layer::derivatives(const Vector &deriv_cost_activ, const Vector &input)
 		// compute derivatives
 		deriv.bias[neuron_id] = _tanh_deriv(weighted_sum) * deriv_cost_activ[neuron_id];
 		for (unsigned input_id = 0; input_id < this->n_input; ++input_id)
+		{
 			deriv.weight[neuron_id][input_id] = input[input_id] * deriv.bias[neuron_id];
+			deriv.derivative_activation[input_id] += this->weight[neuron_id][input_id] * deriv.bias[neuron_id];
+		}
 	}
 	return (deriv);
 }
@@ -103,5 +106,6 @@ Layer	&Layer::operator=(const Layer &rhs)
 		throw (std::logic_error("Invalid layer assignation: size differ"));
 	this->weight = rhs.weight;
 	this->bias = rhs.bias;
+	this->derivative_activation = rhs.derivative_activation;
 	return (*this);
 }

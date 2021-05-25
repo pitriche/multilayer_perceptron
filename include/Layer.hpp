@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 17:49:17 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/25 08:44:46 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ struct Layer
 	Vector				bias;
 	const unsigned		n_input;
 	const unsigned		n_output;
+
+	// for learning, derivative of the cost from the activations of this layer
+	Vector				derivative_activation;
 
 	Layer(void);
 	Layer(unsigned input, unsigned output);

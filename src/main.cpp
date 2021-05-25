@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 17:35:29 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/25 14:00:01 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int			main(int ac, char **av)
 
 	Network net;
 	net.initialize();
-	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
 	net.learning_cycle(train);
-	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
-	net.learning_cycle(train);
-	std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
+	for (unsigned i = 0; i < 20000; ++i)
+	{
+		if (i % 50 == 0)
+			std::cout << "Cost : " << net.cost(test) << " euro" << std::endl;
+		net.learning_cycle(train);
+	}
 	return (0);
 }
