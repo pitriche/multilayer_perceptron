@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/17 13:43:16 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:05:16 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	DataPack::parse(std::istream &is)
 	std::endl;
 }
 
-// #############################################################################
+/* ########################################################################## */
 
 void	DataPack::normalize(void)
 {
@@ -98,9 +98,9 @@ void	DataPack::normalize(void)
 		}
 }
 
-// #############################################################################
+/* ########################################################################## */
 
-DataPack	DataPack::split(double ratio)
+DataPack				DataPack::split(double ratio)
 {
 	DataPack		pack;
 	unsigned		pack_size;
@@ -117,3 +117,22 @@ DataPack	DataPack::split(double ratio)
 	}
 	return (pack);
 }
+
+// std::vector<DataPack>	DataPack::batch(unsigned n)
+// {
+// 	std::vector<DataPack> batches;
+// 	DataPack		pack;
+// 	unsigned		pack_size;
+// 	size_t			swap_id;
+
+// 	if (n < 1)// || n > (this->size() / 2))
+// 		throw (std::logic_error("You donkey"));
+// 	pack_nbr = (unsigned)((1.0 - ratio) * (double)this->size());
+// 	for (unsigned i = 0; i < pack_size; ++i)
+// 	{
+// 		swap_id = (size_t)std::rand() % this->size();
+// 		pack.push_back((*this)[swap_id]);
+// 		this->erase(this->begin() + (long)swap_id);
+// 	}
+// 	return (pack);
+// }

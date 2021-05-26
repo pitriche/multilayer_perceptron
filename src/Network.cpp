@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/25 13:58:47 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/26 13:21:27 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,44 +59,42 @@ real_t					Network::cost(const DataPack &test)
 	for (const Tuple &tup : test)
 	{
 		result = _softmax_1(this->execute(tup));
-		cost += (real_t)std::pow((tup[0] - result), 2);
+		cost -= std::log(tup[0] == 0.0f ? (1 - result) : result);
 	}
 	return (cost / test.size());
 }
 
 void					Network::learning_cycle(const DataPack &train)
 {
-	// average derivatives
+	/* average derivatives */
 	Network	deriv;
 
-	deriv.layer[0].initialize_null();
-	deriv.layer[1].initialize_null();
-	deriv.layer[2].initialize_null();
+	Layer	deriv_l0(TUPLE_SIZE - 1, HIDDEN_LAYER_1);	/* layer 1 activation to cost derivatives */
+	Layer	deriv_l1(HIDDEN_LAYER_1, HIDDEN_LAYER_2);	/* layer 2 activation to cost derivatives */
+	Layer	deriv_l2(HIDDEN_LAYER_2, 2);				/* example's derivatives */
+	
+	Vector 	deriv_cost_activ;
+	Vector	activ_l0;	/* activation of layer 0's neurons */
+	Vector	activ_l1;	/* activation of layer 1's neurons */
+	Vector	activ_l2;	/* activation of layer 2's neurons (network output) */
+	
 	for (const Tuple &example : train)
 	{
-		Layer	deriv_l0(TUPLE_SIZE - 1, HIDDEN_LAYER_1);	// layer 1 activation to cost derivatives
-		Layer	deriv_l1(HIDDEN_LAYER_1, HIDDEN_LAYER_2);	// layer 2 activation to cost derivatives
-		Layer	deriv_l2(HIDDEN_LAYER_2, 2);				// example's derivatives
-		Vector 	deriv_cost_activ;
-		
 		Vector	input(example.begin() + 1, example.end());
-		Vector	activ_l0;	// activation of layer 0's neurons
-		Vector	activ_l1;	// activation of layer 1's neurons
-		Vector	activ_l2;	// activation of layer 2's neurons (network output)
 		
 		activ_l0 = this->layer[0].execute(input);
 		activ_l1 = this->layer[1].execute(activ_l0);
 		activ_l2 = this->layer[2].execute(activ_l1);
 
-		// calculate Layer 2 derivatives
+		/* calculate Layer 2 derivatives */
 		deriv_cost_activ.resize(2);
-		deriv_cost_activ[0] = 2 * (activ_l2[0] + example[0]);
+		deriv_cost_activ[0] = 2 * (activ_l2[0] - (1 - example[0]));
 		deriv_cost_activ[1] = 2 * (activ_l2[1] - example[0]);
 		deriv_l2 = this->layer[2].derivatives(deriv_cost_activ, activ_l1);
 		deriv_l1 = this->layer[1].derivatives(deriv_l2.derivative_activation, activ_l0);
 		deriv_l0 = this->layer[0].derivatives(deriv_l1.derivative_activation, input);
 		
-		// average derivatives layer 2
+		/* average derivatives layer 2 */
 		for (unsigned neuron = 0; neuron < deriv_l2.n_output; ++neuron)
 		{
 			for (unsigned input = 0; input < deriv_l2.n_input; ++input)
@@ -106,7 +104,7 @@ void					Network::learning_cycle(const DataPack &train)
 		for (unsigned input = 0; input < deriv_l2.n_input; ++input)
 			deriv.layer[2].derivative_activation[input] += deriv_l2.derivative_activation[input];
 
-		// average derivatives layer 1
+		/* average derivatives layer 1 */
 		for (unsigned neuron = 0; neuron < deriv_l1.n_output; ++neuron)
 		{
 			for (unsigned input = 0; input < deriv_l1.n_input; ++input)
@@ -116,7 +114,7 @@ void					Network::learning_cycle(const DataPack &train)
 		for (unsigned input = 0; input < deriv_l1.n_input; ++input)
 			deriv.layer[1].derivative_activation[input] += deriv_l1.derivative_activation[input];
 
-		// average derivatives layer 0
+		/* average derivatives layer 0 */
 		for (unsigned neuron = 0; neuron < deriv_l0.n_output; ++neuron)
 		{
 			for (unsigned input = 0; input < deriv_l0.n_input; ++input)
@@ -128,7 +126,7 @@ void					Network::learning_cycle(const DataPack &train)
 	}
 
 
-	// apply derivatives layer 2
+	/* apply derivatives layer 2 */
 	for (unsigned neuron = 0; neuron < deriv.layer[2].n_output; ++neuron)
 	{
 		for (unsigned input = 0; input < deriv.layer[2].n_input; ++input)
@@ -140,7 +138,7 @@ void					Network::learning_cycle(const DataPack &train)
 		this->layer[2].bias[neuron] -= deriv.layer[2].bias[neuron] * LEARNING_RATE;
 	}
 
-	// apply derivatives layer 1
+	/* apply derivatives layer 1 */
 	for (unsigned neuron = 0; neuron < deriv.layer[1].n_output; ++neuron)
 	{
 		for (unsigned input = 0; input < deriv.layer[1].n_input; ++input)
@@ -152,7 +150,7 @@ void					Network::learning_cycle(const DataPack &train)
 		this->layer[1].bias[neuron] -= deriv.layer[1].bias[neuron] * LEARNING_RATE;
 	}
 
-	// apply derivatives layer 0
+	/* apply derivatives layer 0 */
 	for (unsigned neuron = 0; neuron < deriv.layer[0].n_output; ++neuron)
 	{
 		for (unsigned input = 0; input < deriv.layer[0].n_input; ++input)

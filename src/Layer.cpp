@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/25 13:39:56 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:33:32 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 inline static real_t	_rand()
 { return (((real_t)std::rand() / (real_t)INT_MAX) * 2.0f - 1.0f); }
 
-// inline static real_t	_sigmoid(real_t x)
-// { return (1 / (1 + std::pow(M_E, -x))); }
+inline static real_t	_sigmoid(real_t x)
+{ return (1 / (1 + std::exp(-x))); }
+
+inline static real_t	_sigmoid_deriv(real_t x)
+{ return (_sigmoid(x) * (1 - _sigmoid(x))); }
+
 
 inline static real_t	_tanh_deriv(real_t x)
 { return (1 - (real_t)std::pow(std::tanh(x), 2)); }
@@ -49,14 +53,6 @@ void	Layer::initialize(void)
 	for (Vector &vec : this->weight)
 		for (real_t &n : vec)
 			n = _rand();
-
-}
-
-void	Layer::initialize_null(void)
-{
-	std::fill(this->bias.begin(), this->bias.end(), 0.0f);
-	for (Vector &vec : this->weight)
-		std::fill(vec.begin(), vec.end(), 0.0f);
 }
 
 Vector	Layer::execute(const Vector &input)
@@ -70,7 +66,8 @@ Vector	Layer::execute(const Vector &input)
 			result[neuron_id] += input[input_id] *
 			this->weight[neuron_id][input_id];
 		result[neuron_id] += this->bias[neuron_id];
-		result[neuron_id] = std::tanh(result[neuron_id]);	// activation function
+		result[neuron_id] = std::tanh(result[neuron_id]);	/* tanh activation function */
+		// result[neuron_id] = _sigmoid(result[neuron_id]);	/* sigmoid activation function */
 	}
 	return(result);
 }
@@ -82,14 +79,15 @@ Layer	Layer::derivatives(const Vector &deriv_cost_activ, const Vector &input)
 
 	for (unsigned neuron_id = 0; neuron_id < this->n_output; ++neuron_id)
 	{
-		// compute weighted_sum
+		/* compute weighted_sum */
 		weighted_sum = 0;
 		for (unsigned input_id = 0; input_id < this->n_input; ++input_id)
 			weighted_sum += input[input_id] * this->weight[neuron_id][input_id];
 		weighted_sum += this->bias[neuron_id];
 
-		// compute derivatives
+		/* compute derivatives */
 		deriv.bias[neuron_id] = _tanh_deriv(weighted_sum) * deriv_cost_activ[neuron_id];
+		// deriv.bias[neuron_id] = _sigmoid_deriv(weighted_sum) * deriv_cost_activ[neuron_id];
 		for (unsigned input_id = 0; input_id < this->n_input; ++input_id)
 		{
 			deriv.weight[neuron_id][input_id] = input[input_id] * deriv.bias[neuron_id];

@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/12 13:49:21 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:53:01 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ struct DataPack : std::vector<Tuple>
 {
 	public:
 		// parse input stream to gather the data
-		void		parse(std::istream &is);
+		void					parse(std::istream &is);
 
 		// normalize the data
-		void		normalize(void);
+		void					normalize(void);
 
 		// split the data in 2 sets randomly
-		DataPack	split(double ratio);
+		DataPack				split(double ratio);
+
+		// split the data in n sets randomly
+		std::vector<DataPack>	batch(unsigned n);
 };
 
 #endif

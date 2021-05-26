@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/25 08:44:46 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/26 10:40:19 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ struct Layer
 	~Layer(void);
 
 	void	initialize(void);
-	void	initialize_null(void);
 	Vector	execute(const Vector &input);
 	Layer	derivatives(const Vector &deriv_cost_activ, const Vector &input);
 
