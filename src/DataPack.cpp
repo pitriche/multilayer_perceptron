@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/26 15:05:16 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:21:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ DataPack				DataPack::split(double ratio)
 // 	size_t			swap_id;
 
 // 	if (n < 1)// || n > (this->size() / 2))
-// 		throw (std::logic_error("You donkey"));
+// 		throw (std::logic_error("absolute buffoon, moron"));
 // 	pack_nbr = (unsigned)((1.0 - ratio) * (double)this->size());
 // 	for (unsigned i = 0; i < pack_size; ++i)
 // 	{

@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/26 14:33:32 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/27 17:12:43 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@
 inline static real_t	_rand()
 { return (((real_t)std::rand() / (real_t)INT_MAX) * 2.0f - 1.0f); }
 
-inline static real_t	_sigmoid(real_t x)
-{ return (1 / (1 + std::exp(-x))); }
+// inline static real_t	_sigmoid(real_t x)
+// { return (1 / (1 + std::exp(-x))); }
 
-inline static real_t	_sigmoid_deriv(real_t x)
-{ return (_sigmoid(x) * (1 - _sigmoid(x))); }
-
+// inline static real_t	_sigmoid_deriv(real_t x)
+// { return (_sigmoid(x) * (1 - _sigmoid(x))); }
 
 inline static real_t	_tanh_deriv(real_t x)
 { return (1 - (real_t)std::pow(std::tanh(x), 2)); }
@@ -55,7 +54,7 @@ void	Layer::initialize(void)
 			n = _rand();
 }
 
-Vector	Layer::execute(const Vector &input)
+Vector	Layer::execute(const Vector &input) const
 {
 	Vector result;
 
@@ -72,7 +71,7 @@ Vector	Layer::execute(const Vector &input)
 	return(result);
 }
 
-Layer	Layer::derivatives(const Vector &deriv_cost_activ, const Vector &input)
+Layer	Layer::derivatives(const Vector &deriv_cost_activ, const Vector &input) const
 {
 	Layer	deriv(this->n_input, this->n_output);
 	real_t	weighted_sum;

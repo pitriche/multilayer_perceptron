@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/21 17:36:13 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/27 15:05:57 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ struct Network
 	~Network(void);
 
 	void					initialize(void);
-	std::array<real_t, 2>	execute(const Tuple &input);
+	std::array<real_t, 2>	execute(const Tuple &input) const;
 
-	real_t					cost(const DataPack &test);
-	void					learning_cycle(const DataPack &train);
+	real_t					cost(const DataPack &test) const;
+	void					learning_cycle_regular(const DataPack &train);
+	void					export_file(const std::string &file) const;
+	void					import_file(const std::string &file);
 };
 
 #endif
