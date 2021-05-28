@@ -42,7 +42,7 @@ main.cpp		\
 
 # **************************************************************************** #
 
-CC = clang++
+CC = g++
 
 FL_OPTI = -O3 -flto
 FLAGS = -Wall -Wextra -Wconversion -Wunused -Wuninitialized -std=c++11 $(FL_OPTI)

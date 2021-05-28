@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Network.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/27 15:41:11 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/28 09:20:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ real_t					Network::cost(const DataPack &test) const
 		result = _softmax_1(this->execute(tup));
 		cost -= std::log(tup[0] == 0.0f ? (1 - result) : result);
 	}
-	return (cost / test.size());
+	return (cost / (real_t)test.size());
 }
 
 void					Network::learning_cycle_regular(const DataPack &train)
@@ -150,11 +150,11 @@ void					Network::learning_cycle_regular(const DataPack &train)
 	{
 		for (unsigned input = 0; input < deriv.layer[2].n_input; ++input)
 		{
-			deriv.layer[2].weight[neuron][input] /= train.size();
+			deriv.layer[2].weight[neuron][input] /= (real_t)train.size();
 			this->layer[2].weight[neuron][input] -=
 			deriv.layer[2].weight[neuron][input] * LEARNING_RATE;
 		}
-		deriv.layer[2].bias[neuron] /= train.size();
+		deriv.layer[2].bias[neuron] /= (real_t)train.size();
 		this->layer[2].bias[neuron] -= deriv.layer[2].bias[neuron] *
 		LEARNING_RATE;
 	}
@@ -164,11 +164,11 @@ void					Network::learning_cycle_regular(const DataPack &train)
 	{
 		for (unsigned input = 0; input < deriv.layer[1].n_input; ++input)
 		{
-			deriv.layer[1].weight[neuron][input] /= train.size();
+			deriv.layer[1].weight[neuron][input] /= (real_t)train.size();
 			this->layer[1].weight[neuron][input] -=
 			deriv.layer[1].weight[neuron][input] * LEARNING_RATE;
 		}
-		deriv.layer[1].bias[neuron] /= train.size();
+		deriv.layer[1].bias[neuron] /= (real_t)train.size();
 		this->layer[1].bias[neuron] -= deriv.layer[1].bias[neuron] *
 		LEARNING_RATE;
 	}
@@ -178,11 +178,11 @@ void					Network::learning_cycle_regular(const DataPack &train)
 	{
 		for (unsigned input = 0; input < deriv.layer[0].n_input; ++input)
 		{
-			deriv.layer[0].weight[neuron][input] /= train.size();
+			deriv.layer[0].weight[neuron][input] /= (real_t)train.size();
 			this->layer[0].weight[neuron][input] -=
 			deriv.layer[0].weight[neuron][input] * LEARNING_RATE;
 		}
-		deriv.layer[0].bias[neuron] /= train.size();
+		deriv.layer[0].bias[neuron] /= (real_t)train.size();
 		this->layer[0].bias[neuron] -= deriv.layer[0].bias[neuron] *
 		LEARNING_RATE;
 	}

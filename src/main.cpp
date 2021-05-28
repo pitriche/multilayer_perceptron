@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/27 18:24:58 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/05/28 09:20:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void		_execute(const std::string &filename)
 	std::cout << "Total cost: " << net.cost(data) << std::endl;
 	std::cout << "B:   " << correct_b << '/' << total_b << std::endl;
 	std::cout << "M:   " << correct_m << '/' << (int)data.size() - total_b << std::endl;
-	std::cout << "Acc: " << (correct_m + correct_b) / (float)data.size() * 100.0f << '%' << std::endl;
+	std::cout << "Acc: " << (float)(correct_m + correct_b) / (float)data.size() * 100.0f << '%' << std::endl;
 }
 
 /* ########################################################################## */
