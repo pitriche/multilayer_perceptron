@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # first plot
 try :
-	file = open("costs.irc", "r")
+	file = open("costs_test.irc", "r")
 except IOError :
 	print("Cannot open file")
 	exit()
@@ -17,7 +17,7 @@ plt.plot(costs)
 
 # second plot
 try :
-	file = open("costs2.irc", "r")
+	file = open("costs_train.irc", "r")
 except IOError :
 	print("Cannot open file")
 	exit()
