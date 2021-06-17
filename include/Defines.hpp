@@ -6,17 +6,12 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 10:53:26 by pitriche          #+#    #+#             */
-/*   Updated: 2021/06/17 10:05:28 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:54:04 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_HPP
 # define DEFINES_HPP
-
-// # define SEED				460
-// # define TRAIN_TEST_RATIO	0.6
-// # define LEARNING_RATE		0.07f
-// # define LEARNING_CYCLES	650
 
 # define SEED				460
 # define TRAIN_TEST_RATIO	0.5

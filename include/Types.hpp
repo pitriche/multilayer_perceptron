@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 10:53:26 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/26 13:12:16 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:54:49 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define TUPLE_SIZE 31
 
-typedef	float	real_t;	// real type to use everywhere
+typedef	float	real_t;	/* real type to use everywhere */
 
 typedef std::array<real_t, TUPLE_SIZE>		Tuple;
 typedef std::vector<real_t>					Vector;

@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/27 14:58:49 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:54:33 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ struct Layer
 	const unsigned		n_input;
 	const unsigned		n_output;
 
-	// for learning, derivative of the cost from the activations of this layer
+	/* for learning, derivative of the cost from this layer's activations */
 	Vector				derivative_activation;
 
 	Layer(void);

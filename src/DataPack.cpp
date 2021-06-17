@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:04:13 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/27 10:21:47 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/06/17 11:01:16 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static Tuple	_parse_example(std::string &line)
 			else
 				throw std::logic_error("I HATE YOU : >" + tmp + "<");
 		}
-		else if (element >= 2)	// select only useful features
+		else if (element >= 2)	/* select only useful features */
 		{
 			if (!tmp.empty())
 				tup[feature_tup++] = (real_t)std::stold(tmp);
@@ -60,7 +60,7 @@ void	DataPack::parse(std::istream &is)
 	while (is.good())
 	{
 		std::getline(is, tmp);
-		if (tmp.empty()) // skip empty lines including the last one
+		if (tmp.empty()) /* skip empty lines including the last one */
 			continue ;
 		try { this->push_back(_parse_example(tmp)); }
 		catch (std::exception &e)
