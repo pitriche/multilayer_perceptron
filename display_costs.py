@@ -12,7 +12,7 @@ costs = []
 sp = file.readline().split(' ')
 sp.pop()
 for i in sp :
-	costs.append(i)
+	costs.append(float(i))
 plt.plot(costs)
 
 # second plot
@@ -26,7 +26,7 @@ costs = []
 sp = file.readline().split(' ')
 sp.pop()
 for i in sp :
-	costs.append(i)
+	costs.append(float(i))
 plt.plot(costs)
 
 plt.show()
