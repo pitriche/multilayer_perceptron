@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/06/17 10:28:22 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:40:24 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ void		_train(DataPack &train)
 	real_t				old_cost;
 	real_t				new_cost;
 
+	unsigned			i;
+
 	net.initialize();
 	old_cost = INFINITY;
 	test = train.split(TRAIN_TEST_RATIO);
 	std::cout << "train set size: " << train.size() << std::endl;
 	std::cout << "test set size: " << test.size() << std::endl;
-	for (unsigned i = 0; i < LEARNING_CYCLES; ++i)
+	for (i = 0; i < LEARNING_CYCLES; ++i)
 	{
 		if (i % (LEARNING_CYCLES / 12) == 0)
 		{
@@ -106,7 +108,7 @@ void		_train(DataPack &train)
 			}
 		}
 	}
-	std::cout << "Final Epoch : " << LEARNING_CYCLES <<
+	std::cout << "Final Epoch : " << i <<
 	"  \t- Test cost : " << net.cost(test) << " - Train cost : " <<
 	net.cost(train) << std::endl;
 	costs_test.push_back(net.cost(test));
