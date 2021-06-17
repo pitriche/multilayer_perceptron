@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Network.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 13:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/28 09:20:25 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/17 10:00:19 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,4 +233,14 @@ void	Network::import_file(const std::string &file)
 			fs >> bias;
 	}
 	fs.close();
+}
+
+/* ########################################################################## */
+
+Network	&Network::operator=(const Network &rhs)
+{
+	this->layer[0] = rhs.layer[0];
+	this->layer[1] = rhs.layer[1];
+	this->layer[2] = rhs.layer[2];
+	return (*this);
 }

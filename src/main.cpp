@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:14:08 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/28 09:20:57 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/17 10:28:22 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,28 @@ static int	_is_correct(const std::array<real_t, 2> &res, real_t type)
 	return (type == 1.0f);
 }
 
-static void	_export_costs(std::vector<real_t> costs)
+static void	_export_costs(std::vector<real_t> costs_test,
+	std::vector<real_t> costs_train)
 {
 	std::ofstream	ofs;
 	
-	ofs.open("costs.irc");
+	ofs.open("costs_test.irc");
 	if (!ofs.is_open())
 	{
 		std::cout << "Impossible to open file" << std::endl;
 		exit(0);
 	}
-	for (real_t r : costs)
+	for (real_t r : costs_test)
+		ofs << r << ' ';
+	ofs.close();
+
+	ofs.open("costs_train.irc");
+	if (!ofs.is_open())
+	{
+		std::cout << "Impossible to open file" << std::endl;
+		exit(0);
+	}
+	for (real_t r : costs_train)
 		ofs << r << ' ';
 	ofs.close();
 }
@@ -47,10 +58,17 @@ void		_train(DataPack &train)
 {
 	DataPack			save = train;
 	DataPack			test;
+
 	Network				net;
-	std::vector<real_t>	costs;
+	Network				net_save;
+
+	std::vector<real_t>	costs_test;
+	std::vector<real_t>	costs_train;
+	real_t				old_cost;
+	real_t				new_cost;
 
 	net.initialize();
+	old_cost = INFINITY;
 	test = train.split(TRAIN_TEST_RATIO);
 	std::cout << "train set size: " << train.size() << std::endl;
 	std::cout << "test set size: " << test.size() << std::endl;
@@ -63,16 +81,39 @@ void		_train(DataPack &train)
 			net.cost(train) << std::endl;
 		}
 		net.learning_cycle_regular(train);
+
+		/* save costs for graphs */
 		if (i % (LEARNING_CYCLES / 200) == 0)
-			costs.push_back(net.cost(test));
+		{
+			costs_test.push_back(net.cost(test));
+			costs_train.push_back(net.cost(train));
+		}
+
+		/* early stopping check */
+		if (i % EARLY_STOP_CHECK == 0)
+		{
+			new_cost = net.cost(test);
+			if (new_cost < old_cost)
+			{
+				old_cost = new_cost;
+				net_save = net;
+			}
+			else
+			{
+				std::cout << "Early stopping !" << std::endl;
+				net = net_save;
+				break ;
+			}
+		}
 	}
 	std::cout << "Final Epoch : " << LEARNING_CYCLES <<
 	"  \t- Test cost : " << net.cost(test) << " - Train cost : " <<
 	net.cost(train) << std::endl;
-	costs.push_back(net.cost(test));
+	costs_test.push_back(net.cost(test));
+	costs_train.push_back(net.cost(train));
 
 	net.export_file("network.irc");
-	_export_costs(costs);
+	_export_costs(costs_test, costs_train);
 
 	/* ###################################################################### */
 	/* #########################	Accuracy	############################# */

@@ -6,7 +6,7 @@
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:18:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/05/27 15:05:57 by pitriche         ###   ########.fr       */
+/*   Updated: 2021/06/17 09:58:29 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ struct Network
 	void					learning_cycle_regular(const DataPack &train);
 	void					export_file(const std::string &file) const;
 	void					import_file(const std::string &file);
+
+	Network					&operator=(const Network &rhs);
 };
 
 #endif
